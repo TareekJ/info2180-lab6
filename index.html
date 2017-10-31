@@ -5,18 +5,26 @@
   <br><br>
   
 <body>
-  <button type="button" onclick="Research()" id= "request">Search</button>
+  <p>Look up the definition of (eg. ajax, definition, bar, html, css, javscript or
+php)</p>
+  <input type="text" id = "word" size="25" value="">
+  <button type="button" onclick="Research()">Search</button>
+  <br><br>
+  <strong>RESULT</strong>
+  <div id="result"></div>
+  
     <script>
 
     function Research(){
       var xhttp = new XMLHttpRequest();
-      var url = "https://info2180-lab6-termin4321.c9users.io/request.php?q=definition";
+      var word = document.getElementById('word').value;
+      var url = "https://info2180-lab6-termin4321.c9users.io/request.php?q=" + word;
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          document.getElementById("request").innerHTML = this.responseText;
-          alert(this.responseText);
+          document.getElementById("result").innerHTML = this.responseText;
+          
          } 
-      //document.getElementById("request").innerHTML = this.responseText;
+      
     
 }
       xhttp.open("GET", url);
