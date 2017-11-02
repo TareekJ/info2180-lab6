@@ -1,4 +1,9 @@
 <?php
+
+
+header('Content-Type: application/xml');
+
+
 // accept a term (keyword)
 // respond with a value
 $query = $_GET['q'];
@@ -11,5 +16,51 @@ $definition = [
     "javascript" => "A lightweight, interpreted programming language with first-class functions that adds interactivity to your website.",
     "php" => "A server-side scripting language, and a powerful tool for making dynamic and interactive websites",
 ];
-print "<h3>" . strtoupper($query) . "</h3>";
-print "<p>" . $definition[$query] . "</p>";
+
+
+$all = $_GET['all'];
+$output = '
+<entries>
+ <definition name="definition" author="-John">
+  A statement of the exact meaning of a word, especially in a dictionary.
+ </definition>
+ <br/>
+ <definition name="bar" author="-Mary">
+  A place that sells alcholic beverages.
+ </definition>
+ <br/>
+ <definition name="ajax" author="-Kimberly">
+  Technique which involves the use of javascript and xml.
+ </definition>
+ <br/>
+ <definition name="html" author="-Tareek">
+  The standard markup language for creating web pages and web applications.
+ </definition>
+ <br/>
+ <definition name="css" author= "-Kenrick">
+  A style sheet language used for describing the presentation of a document written in a markup language.
+ </definition>
+ <br/>
+ <definition name="javascript" author="-Hal">
+  A lightweight, interpreted programming language with first-class functions that adds interactivity to your website.  
+ </definition>
+ <br/>
+ <definition name="php" author="-Danielle">
+  A server-side scripting language, and a powerful tool for making dynamic and interactive websites.  
+ </definition>
+<entries>';
+
+if($all == true){
+    print ($output);
+} else {
+   print "<h3>" . strtoupper($query) . "</h3>";
+   print "<p>" . $definition[$query] . "</p>";
+}
+
+
+
+    
+// print "<h3>" . strtoupper($query) . "</h3>";
+// print "<p>" . $definition[$query] . "</p>";
+
+

@@ -3,15 +3,16 @@
   <h1>Web Dictionary</h1>
   <br><br>
   <br><br>
-  
+  <link rel="stylesheet" type="text/css" href="define.css" />
 <body>
   <p>Look up the definition of (eg. ajax, definition, bar, html, css, javscript or
 php)</p>
   <input type="text" id = "word" size="25" value="">
-  <button type="button" onclick="Research()">Search</button>
+  <button type="button" onclick="Research()">Search</button> <button type= "button" onclick="All()">GetAllDefinitions</button>
   <br><br>
   <strong>RESULT</strong>
   <div id="result"></div>
+  
   
     <script>
 
@@ -24,12 +25,48 @@ php)</p>
           document.getElementById("result").innerHTML = this.responseText;
           
          } 
-      
-    
-}
+      }
       xhttp.open("GET", url);
       xhttp.send();
+    }
+    
+    var parser = new window.DOMParser();
+    function All(){
+      var xhttp = new XMLHttpRequest();
+      var url = "https://info2180-lab6-termin4321.c9users.io/request.php?q=&all=true";
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var xmlDoc = parser.parseFromString(this.responseText, "application/xml");
+          console.log(xmlDoc);
+          var entries = xmlDoc.getElementsByTagName("definition");
+          console.log(entries);
+          var ordered = document.createElement("ol");
+          for(var i=0;i<entries.length;i++){
+            var listItem = document.createElement("li");
+            
+            var title = document.createElement("h3");
+            var titleText = document.createTextNode(entries[i].outerHTML.split(" ")[1].slice(5));
+            title.appendChild(titleText);
+            listItem.appendChild(title);
+            
+            var defin = document.createElement("p");
+            var definText = document.createTextNode(entries[i].innerHTML);
+            defin.appendChild(definText);
+            listItem.appendChild(defin);
+            
+            var author = document.createElement("p");
+            var authorText = document.createTextNode(entries[i].outerHTML.split(" ")[2].slice(7));
+            author.appendChild(authorText);
+            listItem.appendChild(author);
+            
+            ordered.appendChild(listItem);
+          }
+          document.getElementById("result").appendChild(ordered);
+         } 
       }
+      xhttp.open("GET", url);
+      xhttp.send();
+    }
 
 </script>
 

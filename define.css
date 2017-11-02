@@ -1,0 +1,14 @@
+body {
+	background-color: gray;
+	font-family: "Arial", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+}
+
+h1{
+    color: midnight;
+    font-family: Arial;
+    background-color: Aqua;
+    font-size: 75px;
+    line-height: inherit;
+}
+
